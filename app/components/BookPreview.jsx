@@ -1,16 +1,20 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
 
-const bookUrl = 'https://drive.google.com/file/d/1z0IcChBLVWU_Xv3_iqvL7-jZoVvua4js/view?usp=sharing';
 
-const choices = [
-  ['fade', '01', 'fade + slide'],
-  ['rotate', '02', '3D rotation'],
-  ['open', '03', 'scroll to open'],
+const books = [
+  { id: 'dragon-boy', title: 'The Dragon Boy', cover: '/dragon-boy.png', url: 'https://drive.google.com/file/d/1z0IcChBLVWU_Xv3_iqvL7-jZoVvua4js/view?usp=sharing' },
+  { id: 'dark-horse', title: 'The Dark Horse', cover: '/dark-horse.jpg', url: 'https://drive.google.com/file/d/1IjyVTWSwn6KoTPGyweeiP0pfXZGl4Ii6/view?usp=sharing' },
+  { id: 'playful-dog', title: 'The Playful Dog', cover: '/playful-dog.jpg', url: 'https://drive.google.com/file/d/1Hof7hSjBF_toOA7zEfCLKNz46R91FWQd/view?usp=sharing' },
+  { id: 'great-race', title: 'The Great Race', cover: '/great-race.jpg', url: 'https://drive.google.com/file/d/1CSBi2oSeo12GwUS6vPs42t0ZA3mM8YkP/view?usp=sharing' },
 ];
 
-export default function BookPreview({ variant = 'fade' }) {
+export default function BookPreview() {
+  return <div className="w-full mt-20">{books.map(book => <OpeningBook key={book.id} book={book} />)}</div>;
+}
+
+function OpeningBook({ book }) {
+  const bookUrl = book.url;
   const section = useRef(null);
   const [progress, setProgress] = useState(0);
   const [reduce, setReduce] = useState(false);
@@ -37,57 +41,41 @@ export default function BookPreview({ variant = 'fade' }) {
       media.removeEventListener('change', preference);
     };
   }, []);
-  const p = reduce ? (variant === 'open' ? 0 : 1) : Math.min(1, progress / 0.8);
-  const movement = variant === 'fade'
-    ? { opacity: reduce ? 1 : Math.min(1, 0.12 + p * 1.5), transform: `translateY(${(1-p)*90}px)` }
-    : variant === 'rotate'
-    ? { transform: `rotateX(${(1-p)*10}deg) rotateY(${-58 + p*58}deg) translateY(${(1-p)*35}px)` }
-    : { transform: `translateX(${p*39}%) rotateY(${-8 + p*8}deg)` };
+  const p = reduce ? 0 : Math.min(1, progress / 0.8);
+  const movement = { transform: `translateX(${p*39}%) rotateY(${-8 + p*8}deg)` };
 
   return (
     <div className="book-preview w-full">
-      <div className="mt-20 text-center">
-        <p className="text-xs uppercase tracking-[.18em]">book animation previews</p>
-        <nav aria-label="Choose book animation" className="mt-5 flex flex-wrap justify-center gap-2">
-          {choices.map(([id, number, label]) => (
-            <Link key={id} href={`/books/${id}`} aria-current={variant === id ? 'page' : undefined}
-              className={`rounded-full border border-[#254add]/30 px-4 py-3 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 ${variant === id ? 'bg-[#254add] text-[#fff2b6]' : 'hover:bg-[#254add]/10'}`}>
-              {number} · {label}
-            </Link>
-          ))}
-        </nav>
-        <p className="mt-6 text-sm">scroll down to see it move ↓</p>
-      </div>
-      <section ref={section} className="book-scroll" aria-label={choices.find(c => c[0] === variant)?.[2]}>
+      <section ref={section} id={book.id} className="book-scroll" aria-label={book.title}>
         <div className="book-sticky">
           <div className="mb-10 text-center">
             <p className="mb-2 text-xs uppercase tracking-[.2em]">a book by Mario Mach</p>
-            <h2 className="text-3xl tracking-[-.04em] sm:text-5xl">the dragon boy</h2>
+            <h2 className="text-3xl tracking-[-.04em] sm:text-5xl">{book.title.toLowerCase()}</h2>
           </div>
-          <div className={`book-stage book-stage-${variant}`}>
-            <a href={bookUrl} target="_blank" rel="noopener noreferrer" aria-label="Read The Dragon Boy in Google Drive (opens in a new tab)" className="book-object block cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#254add]" style={movement}>
+          <div className="book-stage book-stage-open">
+            <a href={bookUrl} target="_blank" rel="noopener noreferrer" aria-label={`Read ${book.title} in Google Drive (opens in a new tab)`} className="book-object block cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#254add]" style={movement}>
               <div className="book-pages" aria-hidden="true" />
-              <div className="book-spine" aria-hidden="true">THE DRAGON BOY · MARIO MACH</div>
-              {variant === 'open' && <div className="book-title-page">
+              <div className="book-spine" aria-hidden="true">{book.title.toUpperCase()} · MARIO MACH</div>
+              <div className="book-title-page">
                 <span className="text-[9px] uppercase tracking-[.2em]">title page mockup</span>
-                <strong className="my-6 font-serif text-2xl leading-tight sm:text-4xl">The<br />Dragon Boy</strong>
+                <strong className="my-6 px-4 text-center font-serif text-2xl leading-tight sm:text-4xl">{book.title}</strong>
                 <span className="text-[10px] tracking-[.15em]">MARIO MACH</span>
-              </div>}
-              <div className="book-cover" style={variant === 'open' ? { transform: `translateZ(15px) rotateY(${-p*153}deg)` } : undefined}>
-                <img src="/dragon-boy.png" width="2000" height="2000" alt="The Dragon Boy book cover by Mario Mach" className="book-cover-front" />
-                {variant === 'open' && <div className="book-cover-back" aria-hidden="true"><span>THE DRAGON BOY</span></div>}
+              </div>
+              <div className="book-cover" style={{ transform: `translateZ(15px) rotateY(${-p*153}deg)` }}>
+                <img src={book.cover} loading="lazy" decoding="async" width="2000" height="2000" alt={`${book.title} book cover by Mario Mach`} className="book-cover-front" />
+                <div className="book-cover-back" aria-hidden="true"><span>{book.title.toUpperCase()}</span></div>
               </div>
             </a>
           </div>
           <div className="mt-8 text-center">
             <a href={bookUrl} target="_blank" rel="noopener noreferrer"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#254add] px-7 py-3 font-medium text-[#fff2b6] transition-colors hover:bg-[#1939b5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#254add]"
-              aria-label="Read the book in Google Drive (opens in a new tab)">
+              aria-label={`Read ${book.title} in Google Drive (opens in a new tab)`}>
               Read the book <span aria-hidden="true">↗</span>
             </a>
             <p className="mt-2 text-xs opacity-75">Opens in Google Drive · new tab</p>
           </div>
-          <p className="mt-4 text-sm opacity-70">{reduce ? 'Motion reduced to match your device settings.' : variant === 'open' ? 'keep scrolling to open the cover' : 'scroll back up to replay'}</p>
+          <p className="mt-4 text-sm opacity-70">{reduce ? 'Motion reduced to match your device settings.' : 'keep scrolling to open the cover'}</p>
         </div>
       </section>
     </div>
