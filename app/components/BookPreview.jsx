@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 
 
 const books = [
-  { id: 'dragon-boy', title: 'The Dragon Boy', cover: '/dragon-boy.png', url: 'https://drive.google.com/file/d/1z0IcChBLVWU_Xv3_iqvL7-jZoVvua4js/view?usp=sharing' },
-  { id: 'dark-horse', title: 'The Dark Horse', cover: '/dark-horse.jpg', url: 'https://drive.google.com/file/d/1IjyVTWSwn6KoTPGyweeiP0pfXZGl4Ii6/view?usp=sharing' },
-  { id: 'playful-dog', title: 'The Playful Dog', cover: '/playful-dog.jpg', url: 'https://drive.google.com/file/d/1Hof7hSjBF_toOA7zEfCLKNz46R91FWQd/view?usp=sharing' },
-  { id: 'great-race', title: 'The Great Race', cover: '/great-race.jpg', url: 'https://drive.google.com/file/d/1CSBi2oSeo12GwUS6vPs42t0ZA3mM8YkP/view?usp=sharing' },
+  { id: 'dragon-boy', description: "A Dragon Finds “Himself” In a World of Humans", title: 'The Dragon Boy', cover: '/dragon-boy.png', url: 'https://drive.google.com/file/d/1z0IcChBLVWU_Xv3_iqvL7-jZoVvua4js/view?usp=sharing' },
+  { id: 'dark-horse', description: "Cast out and underestimated, an individual horse discovers a hidden path to freedom, learning that true independence comes from self-reliance and courage.", title: 'The Dark Horse', cover: '/dark-horse.jpg', url: 'https://drive.google.com/file/d/1IjyVTWSwn6KoTPGyweeiP0pfXZGl4Ii6/view?usp=sharing' },
+  { id: 'playful-dog', description: "A story about living many lifetimes in one. When you stop clinging… and start to play.", title: 'The Playful Dog', cover: '/playful-dog.jpg', url: 'https://drive.google.com/file/d/1Hof7hSjBF_toOA7zEfCLKNz46R91FWQd/view?usp=sharing' },
+  { id: 'great-race', description: "Twelve animals enter a great race where talent, hard work, and ambition collide.", title: 'The Great Race', cover: '/great-race.jpg', url: 'https://drive.google.com/file/d/1CSBi2oSeo12GwUS6vPs42t0ZA3mM8YkP/view?usp=sharing' },
 ];
 
 export default function BookPreview() {
@@ -48,9 +48,10 @@ function OpeningBook({ book }) {
     <div className="book-preview w-full">
       <section ref={section} id={book.id} className="book-scroll" aria-label={book.title}>
         <div className="book-sticky">
-          <div className="mb-10 text-center">
+          <div className="mb-6 px-4 text-center sm:mb-8">
             <p className="mb-2 text-xs uppercase tracking-[.2em]">a book by Mario Mach</p>
             <h2 className="text-3xl tracking-[-.04em] sm:text-5xl">{book.title.toLowerCase()}</h2>
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed sm:text-base">{book.description}</p>
           </div>
           <div className="book-stage book-stage-open">
             <a href={bookUrl} target="_blank" rel="noopener noreferrer" aria-label={`Read ${book.title} in Google Drive (opens in a new tab)`} className="book-object block cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#254add]" style={movement}>
@@ -73,9 +74,11 @@ function OpeningBook({ book }) {
               aria-label={`Read ${book.title} in Google Drive (opens in a new tab)`}>
               Read the book <span aria-hidden="true">↗</span>
             </a>
-            <p className="mt-2 text-xs opacity-75">Opens in Google Drive · new tab</p>
+            <div className="mt-3 text-center">
+              <p className="text-xl tracking-[.15em]" aria-label="Five stars">★★★★★</p>
+              <p className="mt-1 text-sm">kids loves it!</p>
+            </div>
           </div>
-          <p className="mt-4 text-sm opacity-70">{reduce ? 'Motion reduced to match your device settings.' : 'keep scrolling to open the cover'}</p>
         </div>
       </section>
     </div>
