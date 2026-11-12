@@ -8,7 +8,7 @@ export default function Portfolio({ variant = 'fade' }) {
     <div className="mx-auto flex min-h-svh max-w-6xl flex-col items-center px-6 pt-14 text-[#254add] sm:px-10 sm:pt-16">
       <main className="flex w-full flex-1 flex-col items-center">
         <h1 className="text-center text-[clamp(2.5rem,6vw,5rem)] leading-[1.12] font-medium tracking-[-0.045em]">
-          come read with me 📖
+          come read along 📖
         </h1>
         <div className="mt-12 w-[min(76vw,390px)] overflow-hidden rounded-[22px] border-2 border-[#254add] shadow-[8px_9px_0_0_#254add] sm:mt-14">
           <Image
