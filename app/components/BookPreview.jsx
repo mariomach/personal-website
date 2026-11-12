@@ -25,8 +25,12 @@ function OpeningBook({ book }) {
       frame = 0;
       if (!section.current) return;
       const rect = section.current.getBoundingClientRect();
-      const distance = Math.max(1, rect.height - window.innerHeight);
-      setProgress(Math.max(0, Math.min(1, -rect.top / distance)));
+      const stickyHeight = section.current.querySelector('.book-sticky')?.offsetHeight ?? window.innerHeight;
+      const distance = Math.max(1, rect.height - stickyHeight);
+      const next = window.innerWidth < 600
+        ? (window.innerHeight * 0.8 - rect.top) / (window.innerHeight * 0.6)
+        : -rect.top / distance;
+      setProgress(Math.max(0, Math.min(1, next)));
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const preference = () => { setReduce(media.matches); schedule(); };
