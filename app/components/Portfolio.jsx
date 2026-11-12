@@ -10,6 +10,7 @@ export default function Portfolio({ variant = 'fade' }) {
         <h1 className="text-center text-[clamp(2rem,5.2vw,4.5rem)] leading-[1.12] font-medium tracking-[-0.045em]">
           “The past gives us memories. The present is subject to our moods. But only the future gives us the power to become more than we are.”
         </h1>
+        <p className="mt-4 text-center text-lg sm:text-xl">-mario mach</p>
         <div className="mt-12 w-[min(76vw,390px)] overflow-hidden rounded-[22px] border-2 border-[#254add] shadow-[8px_9px_0_0_#254add] sm:mt-14">
           <Image
             src="/portrait.jpg"
