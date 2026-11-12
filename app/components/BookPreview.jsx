@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
+const bookUrl = 'https://drive.google.com/file/d/1z0IcChBLVWU_Xv3_iqvL7-jZoVvua4js/view?usp=sharing';
+
 const choices = [
   ['fade', '01', 'fade + slide'],
   ['rotate', '02', '3D rotation'],
@@ -63,7 +65,7 @@ export default function BookPreview({ variant = 'fade' }) {
             <h2 className="text-3xl tracking-[-.04em] sm:text-5xl">the dragon boy</h2>
           </div>
           <div className={`book-stage book-stage-${variant}`}>
-            <div className="book-object" style={movement}>
+            <a href={bookUrl} target="_blank" rel="noopener noreferrer" aria-label="Read The Dragon Boy in Google Drive (opens in a new tab)" className="book-object block cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#254add]" style={movement}>
               <div className="book-pages" aria-hidden="true" />
               <div className="book-spine" aria-hidden="true">THE DRAGON BOY · MARIO MACH</div>
               {variant === 'open' && <div className="book-title-page">
@@ -75,9 +77,17 @@ export default function BookPreview({ variant = 'fade' }) {
                 <img src="/dragon-boy.png" width="2000" height="2000" alt="The Dragon Boy book cover by Mario Mach" className="book-cover-front" />
                 {variant === 'open' && <div className="book-cover-back" aria-hidden="true"><span>THE DRAGON BOY</span></div>}
               </div>
-            </div>
+            </a>
           </div>
-          <p className="mt-12 text-sm opacity-70">{reduce ? 'Motion reduced to match your device settings.' : variant === 'open' ? 'keep scrolling to open the cover' : 'scroll back up to replay'}</p>
+          <div className="mt-8 text-center">
+            <a href={bookUrl} target="_blank" rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#254add] px-7 py-3 font-medium text-[#fff2b6] transition-colors hover:bg-[#1939b5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#254add]"
+              aria-label="Read the book in Google Drive (opens in a new tab)">
+              Read the book <span aria-hidden="true">↗</span>
+            </a>
+            <p className="mt-2 text-xs opacity-75">Opens in Google Drive · new tab</p>
+          </div>
+          <p className="mt-4 text-sm opacity-70">{reduce ? 'Motion reduced to match your device settings.' : variant === 'open' ? 'keep scrolling to open the cover' : 'scroll back up to replay'}</p>
         </div>
       </section>
     </div>
