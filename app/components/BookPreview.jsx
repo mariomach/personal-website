@@ -27,7 +27,10 @@ function OpeningBook({ book }) {
       const rect = section.current.getBoundingClientRect();
       const stickyHeight = section.current.querySelector('.book-sticky')?.offsetHeight ?? window.innerHeight;
       const distance = Math.max(1, rect.height - stickyHeight);
-      setProgress(Math.max(0, Math.min(1, -rect.top / distance)));
+      const next = window.innerWidth < 600
+        ? (window.innerHeight * 0.8 - rect.top) / (window.innerHeight * 0.6)
+        : -rect.top / distance;
+      setProgress(Math.max(0, Math.min(1, next)));
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const preference = () => { setReduce(media.matches); schedule(); };

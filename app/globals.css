@@ -18,7 +18,8 @@ body { margin: 0; font-family: Arial, Helvetica, sans-serif; -webkit-font-smooth
 .book-title-page { position: absolute; inset: 3px; background: linear-gradient(90deg,#d8d0b9,#fffaf0 12%,#fffaf0); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #354b45; transform: translateZ(1px); border-radius: 0 5px 5px 0; }
 @media (max-height: 650px) and (min-width: 600px) { .book-stage { width: 220px; } .book-sticky { min-height: 450px; } }
 @media (max-width: 599px) {
-  .book-scroll { height: auto; margin-top: 0; padding-bottom: 55svh; }
-  .book-sticky { height: auto; min-height: 0; padding: 24px 0; }
+  .book-scroll { height: auto; margin-top: 0; padding-bottom: 0; }
+  .book-preview + .book-preview { margin-top: 40px; }
+  .book-sticky { position: relative; height: auto; min-height: 0; padding: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .book-scroll { height: auto; min-height: 0; padding-bottom: 0; } .book-sticky { position: relative; } .book-object { will-change: auto; } }
