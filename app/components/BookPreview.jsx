@@ -53,34 +53,33 @@ function OpeningBook({ book }) {
       <section ref={section} id={book.id} className="book-scroll" aria-label={book.title}>
         <div className="book-sticky">
           <div className="mb-6 px-4 text-center sm:mb-8">
-            <p className="mb-2 text-xs uppercase tracking-[.2em]">a book by Mario Mach</p>
-            <h2 className="text-3xl tracking-[-.04em] sm:text-5xl">{book.title.toLowerCase()}</h2>
-            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed sm:text-base">{book.description}</p>
+            <p className="mb-2 text-sm sm:text-xs uppercase tracking-[.2em]">a book by Mario Mach</p>
+            <h2 className="text-4xl tracking-[-.04em] sm:text-5xl">{book.title.toLowerCase()}</h2>
+            <p className="mx-auto mt-3 max-w-md text-lg leading-relaxed sm:text-base">{book.description}</p>
           </div>
           <div className="book-stage book-stage-open">
             <a href={bookUrl} target="_blank" rel="noopener noreferrer" aria-label={`Read ${book.title} in Google Drive (opens in a new tab)`} className="book-object block cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#254add]" style={movement}>
               <div className="book-pages" aria-hidden="true" />
               <div className="book-spine" aria-hidden="true">{book.title.toUpperCase()} · MARIO MACH</div>
               <div className="book-title-page">
-                <span className="text-[9px] uppercase tracking-[.2em]">title page mockup</span>
                 <strong className="my-6 px-4 text-center font-serif text-2xl leading-tight sm:text-4xl">{book.title}</strong>
                 <span className="text-[10px] tracking-[.15em]">MARIO MACH</span>
               </div>
               <div className="book-cover" style={{ transform: `translateZ(15px) rotateY(${-p*153}deg)` }}>
                 <img src={book.cover} loading="lazy" decoding="async" width="2000" height="2000" alt={`${book.title} book cover by Mario Mach`} className="book-cover-front" />
-                <div className="book-cover-back" aria-hidden="true"><span>{book.title.toUpperCase()}</span></div>
+                <img src={book.cover} loading="lazy" decoding="async" width="2000" height="2000" alt="" aria-hidden="true" className="book-cover-back" />
               </div>
             </a>
           </div>
           <div className="mt-8 text-center">
             <a href={bookUrl} target="_blank" rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#254add] px-7 py-3 font-medium text-[#fff2b6] transition-colors hover:bg-[#1939b5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#254add]"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#254add] px-7 py-3 text-lg sm:text-base font-medium text-[#fff2b6] transition-colors hover:bg-[#1939b5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#254add]"
               aria-label={`Read ${book.title} in Google Drive (opens in a new tab)`}>
               Read the book <span aria-hidden="true">↗</span>
             </a>
             <div className="mt-3 text-center">
-              <p className="text-xl tracking-[.15em]" aria-label="Five stars">★★★★★</p>
-              <p className="mt-1 text-sm">kids loves it!</p>
+              <p className="text-[28px] sm:text-xl tracking-[.15em]" aria-label="Five stars">★★★★★</p>
+              <p className="mt-1 text-lg sm:text-sm">kids loves it!</p>
             </div>
           </div>
         </div>
