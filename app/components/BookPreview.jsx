@@ -68,7 +68,7 @@ function OpeningBook({ book }) {
               </div>
               <div className="book-cover" style={{ transform: `translateZ(15px) rotateY(${-p*153}deg)` }}>
                 <img src={book.cover} loading="lazy" decoding="async" width="2000" height="2000" alt={`${book.title} book cover by Mario Mach`} className="book-cover-front" />
-                <div className="book-cover-back" aria-hidden="true"><span>{book.title.toUpperCase()}</span></div>
+                <img src={book.cover} loading="lazy" decoding="async" width="2000" height="2000" alt="" aria-hidden="true" className="book-cover-back" />
               </div>
             </a>
           </div>
