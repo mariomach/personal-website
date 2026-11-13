@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import BookPreview from './BookPreview';
 
 const contactClass = "inline-flex size-12 items-center justify-center rounded-full transition-colors hover:bg-[#254add]/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#254add]";
@@ -10,17 +9,6 @@ export default function Portfolio({ variant = 'fade' }) {
         <h1 className="text-center text-[clamp(2.5rem,6vw,5rem)] leading-[1.12] font-medium tracking-[-0.045em]">
           come read along 📖
         </h1>
-        <div className="mt-12 w-[min(76vw,390px)] overflow-hidden rounded-[22px] border-2 border-[#254add] shadow-[8px_9px_0_0_#254add] sm:mt-14">
-          <Image
-            src="/portrait.jpg"
-            alt="Mario Mach sitting in a café"
-            width={2048}
-            height={2048}
-            priority
-            sizes="(max-width: 540px) 76vw, 390px"
-            className="aspect-[4/5] w-full object-cover object-[center_35%]"
-          />
-        </div>
         <BookPreview variant={variant} />
       </main>
       <footer className="flex flex-col items-center pt-16 pb-8 sm:pt-14 sm:pb-9">
